@@ -19,13 +19,13 @@ Setting up autoresponder in settings.py:
 
     MAILZ_AUTORESPOND_ACCOUNTS = [
         {
-            'server': 'imap.yandex.ru',
+            'server': 'imap.domain.com',
             'proto': IMAP4_SSL,
-            'username': 'username@doman.com',
+            'username': 'username@domain.com',
             'password': 'password123',
             'template': 'my_app/autoresponse.html',
             'subject': 'Re: {{subject}}',
-            'from': 'John Doe <johndoe@doman.com>',
+            'from': 'John Doe <johndoe@domain.com>',
             'preprocess': lamda x: x,
             'postprocess': lambda y: y,
         }
