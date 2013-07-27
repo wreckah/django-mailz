@@ -8,6 +8,6 @@ setup(
     author='Alexander Pokatilov',
     author_email='wreckah@ya.ru',
     package_dir = {'': 'django_mailz'},
-    packages = find_packages('django_mailz'),
+    packages = find_packages(),
     install_requires = ['django', 'django-celery'],
 )
