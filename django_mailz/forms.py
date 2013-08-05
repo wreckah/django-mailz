@@ -3,8 +3,6 @@ from email.utils import formataddr, parseaddr
 from django import forms
 from django.core.validators import validate_email
 
-DEFAULT_TYPE = 'text/plain'
-
 
 class NamedEmailField(forms.Field):
 
@@ -28,12 +26,6 @@ class EmailForm(forms.Form):
     recipient = NamedEmailField()
     content_type = forms.CharField()
 
-    def clean(self):
-        cleaned_data = super(TemplatedEmailForm, self).clean()
-        if not cleaned_data.get('content_type'):
-            cleaned_data['content_type'] = DEFAULT_TYPE
-        return cleaned_data
-
 
 class TemplatedEmailForm(forms.Form):
     subject = forms.CharField(max_length=255)
@@ -46,9 +38,6 @@ class TemplatedEmailForm(forms.Form):
 
     def clean(self):
         cleaned_data = super(TemplatedEmailForm, self).clean()
-        if not cleaned_data.get('content_type'):
-            cleaned_data['content_type'] = DEFAULT_TYPE
-
         if not (cleaned_data.get('template') or
                 cleaned_data.get('template_name')):
             msg = 'Please, specify at least one of "template" or ' + \

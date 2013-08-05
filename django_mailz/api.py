@@ -33,7 +33,7 @@ def send(request):
             data['message'],
             data['sender'],
             [data['recipient']],
-            {'Content-Type': data['content_type']}
+            content_type=data.get('content_type')
         )
     except Exception as e:
         return error(unicode(e), 500)
@@ -64,7 +64,7 @@ def send_from_template(request):
             message,
             data['sender'],
             [data['recipient']],
-            {'Content-Type': data['content_type']}
+            content_type=data.get('content_type')
         )
     except Exception as e:
         return error(unicode(e), 500)
