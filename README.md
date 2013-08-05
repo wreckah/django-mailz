@@ -66,3 +66,8 @@ Render Django-template and send email message:
 
     curl -d 'template=Hello, {{ name }}!&context={"name":"John Doe"}&subject=Test message&recipient=john@doe.com&sender=jane@doe.com' \
     'http://127.0.0.1:8089/api/mailz/send_from_template.json'
+
+Or render template from filesystem:
+
+    curl -d 'template_name=myapp/email.html&context={"name":"John Doe"}&subject=Test message&recipient=john@doe.com&sender=jane@doe.com&content_type=text/html' \
+    'http://127.0.0.1:8089/api/mailz/send_from_template.json'
