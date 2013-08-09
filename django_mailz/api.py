@@ -48,11 +48,13 @@ def send_from_template(request):
         return error(email.errors, 400)
 
     data = email.cleaned_data
-    ctx = loads(data['context'])
     try:
         ctx = loads(data['context'])
     except Exception as e:
-        return error(unicode(e), 400)
+        return error(
+            'Cannot parse JSON in "context" parameter: ' + unicode(e),
+            400
+        )
     try:
         if data.get('template'):
             message = render_string(data['template'], ctx)
