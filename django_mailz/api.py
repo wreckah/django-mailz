@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from .forms import EmailForm, TemplatedEmailForm
 from .tasks import send_message
-from .templates import render, render_string
+from .templates import render, RenderError, render_string
 
 
 def response(data):
@@ -53,10 +53,13 @@ def send_from_template(request):
         ctx = loads(data['context'])
     except Exception as e:
         return error(unicode(e), 400)
-    if data.get('template'):
-        message = render_string(data['template'], ctx)
-    else:
-        message = render(data['template_name'], ctx)
+    try:
+        if data.get('template'):
+            message = render_string(data['template'], ctx)
+        else:
+            message = render(data['template_name'], ctx)
+    except RenderError as e:
+        return error(str(e), 400)
 
     try:
         send_message.delay(
