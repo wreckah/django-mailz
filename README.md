@@ -21,7 +21,7 @@ setup_loader()
 MAILZ_AUTORESPOND_ACCOUNTS = [
     {
         'server': 'imap.domain.com',
-        'proto': IMAP4_SSL,
+        'proto': 'django_mailz.IMAP4_SSL',
         'username': 'username@domain.com',
         'password': 'password123',
         'template': 'my_app/autoresponse.html',
